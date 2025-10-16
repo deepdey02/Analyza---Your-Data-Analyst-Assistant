@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Analyza - AI Data Analyst</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-950 to-black min-h-screen p-8 font-sans text-gray-200">
+  <div class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-teal-500 to-purple-600 p-8 rounded-2xl shadow-2xl flex items-center space-x-5">
+      <img src="https://img.icons8.com/color/96/artificial-intelligence.png" alt="AI Icon" class="w-14 h-14 drop-shadow-lg">
+      <div>
+        <h1 class="text-4xl font-extrabold text-white tracking-tight">📊 Analyza - Data Analyst Assistant</h1>
+        <p class="text-gray-100 text-sm mt-1">Unlock insights and get quick answers from your data by asking smart questions effortlessly.</p>
+      </div>
+    </div>
+
+    <!-- Message Alert -->
+    {% if message %}
+      <div class="bg-red-900/60 border-l-4 border-red-500 text-red-200 p-4 rounded-lg shadow-sm" role="alert">
+        <strong class="font-bold">⚠ Error:</strong> {{ message }}
+      </div>
+    {% endif %}
+
+    <!-- Upload & Query Form -->
+    <form method="POST" enctype="multipart/form-data" class="bg-gray-900/80 backdrop-blur-md border border-gray-800 p-8 rounded-2xl shadow-xl space-y-6">
+      
+      <div class="space-y-2">
+        <label class="block font-semibold text-gray-300">🔐 API Key</label>
+        <input type="password" name="api_key" placeholder="Enter your OpenAI API Key" class="w-full p-3 bg-gray-800 text-gray-100 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400" required />
+      </div>
+      
+      <div class="space-y-2">
+        <label class="block font-semibold text-gray-300">📁 Upload your Dataset (CSV / Excel)</label>
+        <input type="file" name="file" accept=".csv,.xlsx" class="w-full p-3 bg-gray-800 text-gray-100 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required />
+      </div>
+      
+      <div class="space-y-2">
+        <label class="block font-semibold text-gray-300">❓ Ask Your Question</label>
+        <textarea name="query" rows="4" placeholder="e.g. Show sales trend by month" class="w-full p-3 bg-gray-800 text-gray-100 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"></textarea>
+      </div>
+      
+      <button type="submit" class="w-full bg-gradient-to-r from-teal-500 to-purple-600 text-white py-3 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-teal-500/40 transition duration-300 font-semibold">
+        🚀 Let's Analyze Data
+      </button>
+    </form>
+
+    <!-- Data Preview -->
+    {% if df_preview_html %}
+      <div class="bg-gray-900 p-6 rounded-2xl shadow-lg border border-gray-800">
+        <h2 class="text-2xl font-semibold text-teal-400 mb-4">👁 Preview: First 5 Rows</h2>
+        <div class="overflow-x-auto border border-gray-800 rounded-lg bg-gray-950">
+          {{ df_preview_html | safe }}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Generated Code -->
+    {% if code_generated %}
+      <div class="bg-black text-green-400 p-6 rounded-2xl shadow-lg border border-gray-800">
+        <h2 class="text-2xl font-semibold text-green-400 mb-4">🧠 Generated Pandas Code</h2>
+        <pre class="overflow-auto text-sm"><code>{{ code_generated }}</code></pre>
+      </div>
+    {% endif %}
+
+    <!-- Result -->
+    {% if result_html %}
+      <div class="bg-gray-900 p-6 rounded-2xl shadow-lg border border-gray-800">
+        <h2 class="text-2xl font-semibold text-purple-400 mb-4">✅ Analysis Result</h2>
+        <div class="overflow-x-auto border border-gray-800 rounded-lg bg-gray-950">
+          {{ result_html | safe }}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</body>
+</html>
