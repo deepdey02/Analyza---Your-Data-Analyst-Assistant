@@ -21,7 +21,7 @@ Data Processing: Pandas
 
 AI/LLM: Groq API (for code generation)
 
-Frontend: HTML, Tailwind CSS, Jinja2 Templates
+Frontend: HTML
 
 Getting Started
 Prerequisites
